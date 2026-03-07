@@ -45,10 +45,9 @@ Play it here:
 - If the snake reaches maximum speed, the player wins.
 
 ## 🛠 Technologies Used
-- HTML5 Canvas
-- JavaScript (Vanilla JS)
-- CSS
-- SVG Icons
+- - ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+- ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
 ## Mobile Optimization
 The game includes several improvements for mobile gameplay:
@@ -63,13 +62,9 @@ tic-tac-toe/
 │── index.html        # Main game layout
 │── style.css         # Styling for the game board & UI
 │── game.js           # Game logic
-│── images/           # Icon, game play gif
+│── images/           # Icon
 └── README.md         # README file
 ```
-
-## 🖥️ Gameplay
-
-![Game Play](images/game-play.gif)
 
 ## 📜 License
 This project is open for learning and free to use!
