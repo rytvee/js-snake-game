@@ -1,32 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JS Snake Game</title>
-<style>
-body{
-    margin:0;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    background:#222;
-    color:white;
-}
-canvas{
-    margin-top: 10px;
-    border:1px solid white;
-    display:block;
-    max-width:95vw;
-    max-height:95vh;
-}
-</style>
-</head>
-<body>
-
-<canvas id="canvas"></canvas>
-
-<script>
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -290,6 +261,3 @@ window.onload = () => {
     initGame();
 };
 window.addEventListener("resize", resizeCanvas);
-</script>
-</body>
-</html>
