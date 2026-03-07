@@ -27,25 +27,45 @@ Play it here:
 | **⬅ Arrow Left**      | Move Left.        |
 | **➡ Arrow Right**     | Move Right.       |
 
+### Mobile
+| Gesture              | Action            |
+| ---------------------| ----------------- |
+| **Swipe Up**         | Move Up.          |
+| **Swipe Down**       | Move Down.        |
+| **Swipe Left**       | Move Left.        |
+| **Swipe Right**      | Move Right.       |
+
+##  🧩 Game Mechanics
+- The snake grows each time it eats food.
+- Every 5 points increases the level.
+- Each level increases the game speed.
+- The game ends if:
+  - The snake hits a wall
+  - The snake collides with itself
+- If the snake reaches maximum speed, the player wins.
+
+## 🛠 Technologies Used
+- HTML5 Canvas
+- JavaScript (Vanilla JS)
+- CSS
+- SVG Icons
+
+## Mobile Optimization
+The game includes several improvements for mobile gameplay:
+- Swipe detection
+- Prevention of browser pull-to-refresh
+- Touch tap detection
+- Responsive canvas scaling
+
 ## 📂 Folder Structure
 ```text
 tic-tac-toe/
 │── index.html        # Main game layout
 │── style.css         # Styling for the game board & UI
 │── game.js           # Game logic
-│── sounds/           # music, sounds 
-└── images/           # Icon, game play gif
+│── images/           # Icon, game play gif
+└── README.md         # README file
 ```
-
-##  📋 Overview
-
-| Part                   | Role                                                                                          |
-| ---------------------- | --------------------------------------------------------------------------------------------- |
-| **Ball**               | Moves up/down & bounces off walls and paddle. Position updates using `requestAnimationFrame`. |
-| **Paddle**             | Controlled by user (move left/right or up/down depending on implementation).                  |
-| **Collision Logic**    | Detects overlap between ball and paddle or walls. Reverses direction upon impact.             |
-| **Scoring**            | Tracks hits and keeps points.                                                                 |
-
 
 ## 🖥️ Gameplay
 
