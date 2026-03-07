@@ -1,0 +1,15 @@
+body{
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    background:#222;
+    color:white;
+}
+canvas{
+    margin-top: 10px;
+    border:1px solid white;
+    display:block;
+    max-width:95vw;
+    max-height:95vh;
+}
