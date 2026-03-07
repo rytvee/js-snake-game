@@ -3,7 +3,7 @@ A responsive **HTML5 Canvas Snake Game** built with **JavaScript**, designed to 
 
 ## 🎮 Live Demo
 Play it here:
-[Live Snake Game](https://https://rytvee.github.io/js-snake-game/)
+[Live Snake Game]([https://https://rytvee.github.io/js-snake-game](https://rytvee.github.io/js-snake-game/))
 
 ## ✨ Features
 - 📱 Mobile Swipe Controls
