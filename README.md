@@ -20,12 +20,12 @@ Play it here:
 
 ## 🕹 Controls
 ### Desktop
-| Key                   | Action                                                                                          |
-| ---------------------- | --------------------------------------------------------------------------------------------- |
-| **⬆ Arrow Up**               | Move Up. |
-| **⬇ Arrow Down**             | Move Down.                  |
-| **⬅ Arrow Left**    | Move Left.             |
-| **➡ Arrow Right**            | Move Right.                                                                 |
+| Key                    | Action            |
+| ---------------------- | ----------------- |
+| **⬆ Arrow Up**         | Move Up.          |
+| **⬇ Arrow Down**       | Move Down.        |
+| **⬅ Arrow Left**      | Move Left.        |
+| **➡ Arrow Right**     | Move Right.       |
 
 ## 📂 Folder Structure
 ```text
