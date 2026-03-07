@@ -90,6 +90,7 @@ function moveSnake(){
     if(head.x<0 || head.x>=gridSizeX || head.y<0 || head.y>=gridSizeY){
         gameOver=true;
         clearInterval(game);
+        drawSnake();   // force redraw
         return;
     }
 
@@ -97,6 +98,7 @@ function moveSnake(){
     if(snake.some(seg => seg.x===head.x && seg.y===head.y)){
         gameOver=true;
         clearInterval(game);
+        drawSnake();   // force redraw
         return;
     }
 
@@ -169,10 +171,18 @@ function drawHUDIcons(){
 
 // --- Restart button ---
 function drawRestartButton(){
-    const btnWidth = tileSize*6;
-    const btnHeight = tileSize*2;
-    const btnX = canvas.width/2 - btnWidth/2;
-    const btnY = canvas.height/2 + tileSize*1.5;
+    const btnWidth = tileSize * 6;
+    const btnHeight = tileSize * 2;
+    const btnX = canvas.width / 2 - btnWidth / 2;
+    const btnY = canvas.height / 2 + tileSize * 1.5;
+
+    // Set clickable area FIRST
+    restartButtonArea = {
+        x: btnX,
+        y: btnY,
+        width: btnWidth,
+        height: btnHeight
+    };
 
     ctx.fillStyle = "white";
     ctx.strokeStyle = "black";
@@ -184,9 +194,7 @@ function drawRestartButton(){
     ctx.font = `${tileSize}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("Restart", canvas.width/2, btnY + btnHeight/2);
-
-    restartButtonArea = {x:btnX, y:btnY, width:btnWidth, height:btnHeight};
+    ctx.fillText("Restart", canvas.width / 2, btnY + btnHeight / 2);
 }
 
 // --- Toggle pause ---
