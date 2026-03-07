@@ -248,20 +248,21 @@ canvas.addEventListener("touchmove",(e)=>{
     e.preventDefault();
 },{passive:false});
 canvas.addEventListener("touchend",(e)=>{
-    if(gameOver) return;
     const touch = e.changedTouches[0];
 
-    // detect swipe
     const dxSwipe = touch.clientX - touchStartX;
     const dySwipe = touch.clientY - touchStartY;
     const absX = Math.abs(dxSwipe);
     const absY = Math.abs(dySwipe);
 
+    // Treat small movement as a tap
     if(Math.max(absX, absY) < 40){
-        // treat as tap
         handleCanvasInteraction(touch.clientX, touch.clientY);
         return;
     }
+
+    // If game is over, ignore swipes but allow taps
+    if(gameOver) return;
 
     if(absX>absY){
         if(dxSwipe>0 && dx===0){ dx=1; dy=0; }
