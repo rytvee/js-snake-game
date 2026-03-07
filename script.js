@@ -194,28 +194,35 @@ function togglePause(){
 }
 
 // --- Click / touch detection ---
-canvas.addEventListener("click",(e)=>{
+function handleCanvasInteraction(clientX, clientY){
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
 
     // Pause/Play icon
     const iconSize = tileSize*1.5;
     const iconX = tileSize*0.5;
     const iconY = tileSize*0.2;
+
     if(!gameOver && x>=iconX && x<=iconX+iconSize && y>=iconY && y<=iconY+iconSize){
         togglePause();
     }
 
     // Restart button
     if(gameOver && restartButtonArea){
-        if(x>=restartButtonArea.x && x<=restartButtonArea.x+restartButtonArea.width &&
-           y>=restartButtonArea.y && y<=restartButtonArea.y+restartButtonArea.height){
+        if(
+            x>=restartButtonArea.x &&
+            x<=restartButtonArea.x + restartButtonArea.width &&
+            y>=restartButtonArea.y &&
+            y<=restartButtonArea.y + restartButtonArea.height
+        ){
             initGame();
         }
     }
+}
+canvas.addEventListener("click",(e)=>{
+    handleCanvasInteraction(e.clientX, e.clientY);
 });
-
 // --- Keyboard controls ---
 document.addEventListener("keydown",(e)=>{
     if(e.key==="ArrowUp" && dy===0){ dx=0; dy=-1; }
@@ -237,20 +244,28 @@ canvas.addEventListener("touchmove",(e)=>{
 },{passive:false});
 canvas.addEventListener("touchend",(e)=>{
     const touch = e.changedTouches[0];
+
+    // detect swipe
     const dxSwipe = touch.clientX - touchStartX;
     const dySwipe = touch.clientY - touchStartY;
     const absX = Math.abs(dxSwipe);
     const absY = Math.abs(dySwipe);
-    if(Math.max(absX, absY) < 30) return;
+
+    if(Math.max(absX, absY) < 30){
+        // treat as tap
+        handleCanvasInteraction(touch.clientX, touch.clientY);
+        return;
+    }
 
     if(absX>absY){
         if(dxSwipe>0 && dx===0){ dx=1; dy=0; }
         else if(dxSwipe<0 && dx===0){ dx=-1; dy=0; }
-    } else {
+    } 
+    else{
         if(dySwipe>0 && dy===0){ dx=0; dy=1; }
         else if(dySwipe<0 && dy===0){ dx=0; dy=-1; }
     }
-});
+},{passive:false});
 
 // --- Game loop ---
 function gameLoop(){ moveSnake(); drawSnake(); }
