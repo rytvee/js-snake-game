@@ -16,5 +16,4 @@ canvas{
     max-width:95vw;
     max-height:95vh;
     overscroll-behavior: none; /* stops pull-to-refresh */
-    touch-action: none; /* prevents the browser from interpreting gestures like scroll or zoom */
 }
