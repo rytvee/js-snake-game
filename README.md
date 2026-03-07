@@ -32,7 +32,7 @@ Play it here:
 tic-tac-toe/
 │── index.html        # Main game layout
 │── style.css         # Styling for the game board & UI
-│── game.js           # Game logic (players, computer AI, score)
+│── game.js           # Game logic
 │── sounds/           # music, sounds 
 └── images/           # Icon, game play gif
 ```
