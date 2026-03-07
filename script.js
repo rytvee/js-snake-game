@@ -52,6 +52,11 @@ function initGame(){
         {x: Math.floor(gridSizeX/2)-1, y: Math.floor(gridSizeY/2)},
         {x: Math.floor(gridSizeX/2)-2, y: Math.floor(gridSizeY/2)}
     ];
+
+    // RESET DIRECTION
+    dx = 1;
+    dy = 0;
+
     spawnFood();
     score=0;
     level=1;
@@ -59,10 +64,10 @@ function initGame(){
     gameOver=false;
     winner=false;
     paused=false;
+
     clearInterval(game);
     game = setInterval(gameLoop, speed);
 }
-
 // --- Spawn food ---
 function spawnFood(){
     let newFood;
@@ -243,6 +248,7 @@ canvas.addEventListener("touchmove",(e)=>{
     e.preventDefault();
 },{passive:false});
 canvas.addEventListener("touchend",(e)=>{
+    if(gameOver) return;
     const touch = e.changedTouches[0];
 
     // detect swipe
@@ -251,7 +257,7 @@ canvas.addEventListener("touchend",(e)=>{
     const absX = Math.abs(dxSwipe);
     const absY = Math.abs(dySwipe);
 
-    if(Math.max(absX, absY) < 30){
+    if(Math.max(absX, absY) < 40){
         // treat as tap
         handleCanvasInteraction(touch.clientX, touch.clientY);
         return;
