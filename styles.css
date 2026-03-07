@@ -3,7 +3,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    background:#222 !important;
+    background:#222;
     color:white;
 }
 canvas{
