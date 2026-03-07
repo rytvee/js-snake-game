@@ -33,16 +33,18 @@ function resizeCanvas(){
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
-    // Adjust vertical tiles for mobile
-    gridSizeY = (screenWidth < 768) ? 30 : 20;
-
     canvas.width = screenWidth * 0.9;
     canvas.height = screenHeight * 0.85;
 
-    tileSize = Math.min(canvas.width / gridSizeX, canvas.height / gridSizeY);
+    // Fixed tile size
+    tileSize = 20;
 
-    offsetX = (canvas.width - tileSize*gridSizeX)/2;
-    offsetY = (canvas.height - tileSize*gridSizeY)/2;
+    // Calculate how many tiles fit in canvas
+    gridSizeX = Math.floor(canvas.width / tileSize);
+    gridSizeY = Math.floor(canvas.height / tileSize);
+
+    offsetX = (canvas.width - gridSizeX * tileSize) / 2;
+    offsetY = (canvas.height - gridSizeY * tileSize) / 2;
 }
 
 // --- Initialize game ---
