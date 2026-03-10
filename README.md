@@ -49,7 +49,7 @@ The game includes several improvements for mobile gameplay:
 
 ## Folder Structure
 ```text
-tic-tac-toe/
+js-snake-game/
 │── index.html        # Main game layout
 │── style.css         # Styling for the game board & UI
 │── game.js           # Game logic
