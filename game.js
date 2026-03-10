@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -14,7 +15,12 @@ let dx=1, dy=0;
 
 let score = 0;
 let level = 1;
-let speed = 500;
+let speed = 300;
+let minSpeed = 50;
+let reduceSpeed = 25;
+let maxLevel = 10;
+let scorePerLevel = 5;
+let maxScore = maxLevel * scorePerLevel;
 let game;
 let paused = false;
 let gameOver = false;
@@ -36,17 +42,19 @@ function resizeCanvas(){
     canvas.width = screenWidth * 0.9;
     canvas.height = screenHeight * 0.85;
 
-    // Fixed tile size
     tileSize = 20;
 
-    // Calculate how many tiles fit in canvas
     gridSizeX = Math.floor(canvas.width / tileSize);
     gridSizeY = Math.floor(canvas.height / tileSize);
 
-    offsetX = (canvas.width - gridSizeX * tileSize) / 2;
-    offsetY = (canvas.height - gridSizeY * tileSize) / 2;
-}
+    // Remove centering offsets
+    offsetX = 0;
+    offsetY = 0;
 
+    // Resize canvas to match grid exactly
+    canvas.width = gridSizeX * tileSize;
+    canvas.height = gridSizeY * tileSize;
+}
 // --- Initialize game ---
 function initGame(){
     snake = [
@@ -60,12 +68,14 @@ function initGame(){
     dy = 0;
 
     spawnFood();
-    score=0;
-    level=1;
-    speed=500;
-    gameOver=false;
-    winner=false;
-    paused=false;
+    score = 0;
+    level = 1;
+    maxLevel = 10;
+    speed = 300;
+    minSpeed = 50;
+    gameOver = false;
+    winner = false;
+    paused = false;
 
     clearInterval(game);
     game = setInterval(gameLoop, speed);
@@ -109,13 +119,22 @@ function moveSnake(){
     // Food collision
     if(head.x===food.x && head.y===food.y){
         score++;
-        spawnFood();
-        if(score % 5 === 0){
-            level++;
-            speed = Math.max(50, speed-25);
-            if(speed===50){ gameOver=true; winner=true; clearInterval(game); }
-            else { clearInterval(game); game = setInterval(gameLoop, speed); }
+        // Spawn food only before reaching max level
+        if(score < maxScore){
+            spawnFood();
         }
+        // Level progression
+        if(score % scorePerLevel === 0 && level < maxLevel){
+            level++;
+            speed -= reduceSpeed;
+        }
+        if(level === maxLevel && score === maxScore){
+            gameOver = true;
+            winner = true;
+            clearInterval(game);
+        }
+        else { clearInterval(game); game = setInterval(gameLoop, speed); }
+        
     } else {
         snake.pop();
     }
@@ -126,9 +145,10 @@ function drawSnake(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     // --- Food ---
-    ctx.fillStyle = "lime";
-    ctx.fillRect(offsetX + food.x*tileSize, offsetY + food.y*tileSize, tileSize, tileSize);
-
+    if(level <= maxLevel){
+        ctx.fillStyle = "lime";
+        ctx.fillRect(offsetX + food.x*tileSize, offsetY + food.y*tileSize, tileSize, tileSize);
+    }
     // --- Snake ---
     for(let i=0;i<snake.length;i++){
         ctx.fillStyle = (i===0) ? "red":"black";
@@ -155,7 +175,7 @@ function drawSnake(){
         ctx.font = `${tileSize*2}px Arial`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        if(winner) ctx.fillText("🎉 You Win! 🎉", canvas.width/2, canvas.height/2);
+        if(winner) ctx.fillText("You Win!", canvas.width/2, canvas.height/2);
         else ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
 
         drawRestartButton();
